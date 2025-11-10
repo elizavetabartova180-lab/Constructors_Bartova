@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,32 @@ namespace Constructors_Bartova
     /// </summary>
     public partial class MainWindow : Window
     {
+        public List<Classes.Student> AllStudent = Classes.RepoStudents.AllStudents();
+        public int Count = 10;
+        public int Step = 0;
         public MainWindow()
         {
             InitializeComponent();
+            CreateStudent(Step,Count);
         }
+        public void CreateStudent(int Step, int Count)
+        {
+            for(int iStudent = Step; iStudent < Step + Count; iStudent++)
+                if(AllStudent.Count > iStudent)
+                    parent.Children.Add(new Elements.Student(AllStudent[iStudent]));
+            this.Step += Count;
+        }
+        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        { 
+            ScrollViewer scroll = sender as ScrollViewer;
+            double ParentHeight = parent.ActualHeight;
+            double WindowHeight = scroll.ActualHeight - 20;
+            double DeltaHeight = ParentHeight - WindowHeight;
+            if (DeltaHeight - scroll.VerticalOffset < 140)
+            {
+                CreateStudent(Step, Count);
+            }
+        }
+             
     }
 }
