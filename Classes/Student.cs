@@ -31,7 +31,7 @@ namespace Constructors_Bartova.Classes
         }
         public string GetFIO()
         {
-            return $"{LastName}{FirstName}{SurName}";
+            return $"{FirstName}{LastName}{SurName}";
         }
     }
 }

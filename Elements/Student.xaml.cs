@@ -26,6 +26,10 @@ namespace Constructors_Bartova.Elements
             tb_fio.Content = student.GetFIO();
             tb_scholarship.Content = student.Scholarship ? "Стипендия: получает" : "Стипендия: не получает";
             tb_course.Content = $"Курс:{student.Course}";
+            if (student.Scholarship)
+            {
+                mainGrid.Background = new SolidColorBrush(Color.FromRgb(45, 74, 45)); // #2D4A2D
+            }
         }
     }
 }
